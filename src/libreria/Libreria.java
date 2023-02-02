@@ -5,8 +5,10 @@ package Libreria;
 
 import java.util.Scanner;
 import servicios.autorService;
+import servicios.clienteService;
 import servicios.editorialService;
 import servicios.libroService;
+import servicios.prestamoService;
 
 public class Libreria {
 
@@ -17,6 +19,8 @@ public class Libreria {
         libroService ls = new libroService();
         autorService as = new autorService();
         editorialService es = new editorialService();
+        clienteService cs = new clienteService();
+        prestamoService ps = new prestamoService();
 
         System.out.println("ingresando a la tabla de la libreria");
         bucleMenu:
@@ -36,7 +40,10 @@ public class Libreria {
                     + "12)Búsqueda de un libro por Título." + "\n"
                     + "13)Búsqueda de un libro/s por nombre de Autor." + "\n"
                     + "14)Búsqueda de un libro/s por nombre de Editorial." + "\n"
-                    + "15)Salir." + "\n");
+                    + "15)Crear cliente." + "\n"
+                    + "16)Crear prestamo." + "\n"
+                    + "17)Buscar todos los prestamos de un cliente." + "\n"
+                    + "18)Salir." + "\n");
             switch (leer.nextInt()) {
                 case 1:
                     ls.añadirLibro();
@@ -86,10 +93,18 @@ public class Libreria {
                     ls.consultarLibroXNombreEditorial(leer.next());
                     break;
                 case 15:
+                    cs.crearCliente();
+                    break;
+                case 16:
+                    ps.crearPrestamo();
+                    break;
+                case 17:
+                    ps.buscarPrestamosXCliente();
+                    break;
+                case 18:
                     break bucleMenu;
                 default:
                     System.out.println("ingrese un dato valido");
-
             }
         } while (true);
     }

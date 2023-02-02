@@ -4,6 +4,7 @@ import entidades.cliente;
 import entidades.libro;
 import entidades.prestamo;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Scanner;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
@@ -53,6 +54,10 @@ public class prestamoService {
 
                 prestamo.setFechaPrestamo(fechaprestamo);
                 prestamo.setFechaDevolucion(fechadevolucion);
+                
+                em.getTransaction().begin();
+                em.persist(prestamo);
+                em.getTransaction().commit();
 
             } catch (Exception e) {
             }
@@ -60,7 +65,24 @@ public class prestamoService {
         }
 
     }
-    
-    
-    
+
+    public void buscarPrestamosXCliente() {
+
+        try {
+            EntityManager em = Persistence.createEntityManagerFactory("LibreriaPersistencia").createEntityManager();
+            try {
+                System.out.println("Ingresar el ID del cliente:");
+                String id = leer.next();
+                List<prestamo> prestamos = em.createQuery("SELECT p FROM cliente c, prestamo p WHERE c.id = '" + id + "'").getResultList();
+                prestamos.forEach((aux) -> {
+                    System.out.println(aux);
+                });
+
+            } catch (Exception e) {
+                System.out.println("No existen prestamos realizados a nombre del cliente");
+            }
+        } catch (Exception e) {
+        }
+    }
+
 }
