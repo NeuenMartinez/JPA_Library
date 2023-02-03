@@ -21,8 +21,7 @@ public class Libreria {
         editorialService es = new editorialService();
         clienteService cs = new clienteService();
         prestamoService ps = new prestamoService();
-
-        System.out.println("ingresando a la tabla de la libreria");
+        
         bucleMenu:
         do {
             System.out.println("ingrese que desea hacer");

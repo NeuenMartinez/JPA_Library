@@ -33,6 +33,7 @@ public class prestamoService {
                     prestamo.setLibro(libro);
                 } catch (Exception e) {
                     System.out.println("El codigo del libro ingresado no existe en el sistema");
+                    return;
                 }
                 try {
                     System.out.println("Ingresar el ID del cliente");
